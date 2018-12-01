@@ -20,7 +20,7 @@ const adminLoginInputWrong = 'Доступ запрещен, неверный л
 const adminLoginInputCancel = 'Отменено пользователем!';
 
 const adminPasswordWrong = 'Доступ запрещен, неверный логин!';
-const admminPasswordCancel = 'Отменено пользователем';
+const admminPasswordCancel = 'Отменено пользователем!';
 
 const adminInputCorrect = 'Добро пожаловать!';
 
