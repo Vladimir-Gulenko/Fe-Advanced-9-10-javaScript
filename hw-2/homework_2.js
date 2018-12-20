@@ -12,16 +12,17 @@ const numbers = [];
 let total = 0;
 const inputAsk = 'Введите число';
 const inputWrong = 'Было введено не число, попробуйте еще раз';
+const arreyEmpty = 'Вы забыли ввести число. Повторите ввод!';
 
 do {
   userInput = prompt(inputAsk);
-  if (userInput % 1 !== 0 || userInput === '' || userInput === ' ' || userInput<0) {
+  if (userInput % 1 !== 0 || userInput === '' || userInput === ' ' || userInput < 0) {
     alert(inputWrong);
   } else {
     numbers.push(userInput);
   }
 } while (userInput !== null);
-for (let i = 0; i < numbers.length - 1; i += 1) 
-  total += Number(numbers[i]);
-{
-alert('Общая сумма чисел равна: ' + total);}
+for (let i = 0; i < numbers.length - 1; i += 1)
+  total += Number(numbers[i]); {
+  alert('Общая сумма чисел равна: ' + total);
+}
