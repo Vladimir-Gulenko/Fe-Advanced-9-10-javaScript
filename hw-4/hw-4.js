@@ -1,6 +1,6 @@
 'use strict';
 
-// Создайте скрипт кассира, который получает список продуктов и деньги, подсчитывает общую стоимость продуктов, 
+// Создайте скрипт кассира, который получает список продуктов и деньги, подсчитывает общую стоимость продуктов,
 // и в зависимости от того хватает денег или нет, уведомляет покупателя о результате.
 
 // Создайте объект cashier со следующими свойствами и методами:
@@ -12,9 +12,9 @@
 // error - свойство хранящее текст ошибки, начальное значение null
 // greet() - метод, использует значение свойства name, выводит в консоль сообщение Добрый день, вас обслуживает ${name}
 // getCustomerMoney(value) - метод, получает число (деньги клиента), и записывает его в свойство customerMoney.
-// countTotalPrice(allProducts, order) - метод, получает объекты всех продуктов и списка покупок, считает общую стоимость покупок 
-// и записывает результат в свойство totalPrice. Ключи объекта order есть в объекте products, который будет записан в параметр allProducts. 
-// Из order берем количество единиц продукта, а из allProducts цену за одну штуку и умножаем, так получаем цену одного типа продукта в заказе. 
+// countTotalPrice(allProducts, order) - метод, получает объекты всех продуктов из списка покупок, считает общую стоимость покупок
+// и записывает результат в свойство totalPrice. Ключи объекта order есть в объекте products, который будет записан в параметр allProducts.
+// Из order берем количество единиц продукта, а из allProducts цену за одну штуку и умножаем, так получаем цену одного типа продукта в заказе.
 // Чтобы посчитать цену для всех продуктов заказа используйте цикл, перебрав все ключи order.
 // countChange() - метод, считает сдачу, разницу между общей суммой покупок и деньгами клиента, записывает результат в свойство change.
 // Обязательно проверьте что customerMoney не меньше значения totalPrice
@@ -41,7 +41,52 @@ const order = {
   cheese: 1,
 };
 
+//Обьект кассир.
 
+const cashier = {
+  name: 'Mango',
+  customerMoney: 0,
+  totalPrice: 0,
+  change: 0,
+  error: null,
+  greet() {
+    console.log(`Добрый день, вас обслуживает ${cashier.name}`);
+  },
+  getCustomerMoney(value) {
+    cashier.customerMoney = value;
+  },
+  countTotalPrice(allProducts, order) {
+    let total = 0;
+    for (const productKey in allProducts) {
+      for (const orderKey in order) {
+        if (productKey === orderKey) {
+          total += Number(allProducts[productKey]) * Number(order[orderKey]);
+        }
+      }
+    }
+    cashier.totalPrice = total;
+  },
+  countChange() {
+    if (Number(cashier.totalPrice) <= Number(cashier.customerMoney)) {
+      cashier.change =
+        Number(cashier.customerMoney) - Number(cashier.totalPrice);
+    } else {
+      cashier.error = 'Bам не хватает денег на покупки !';
+    }
+  },
+  onSuccess() {
+    console.log(`Спасибо за покупку, ваша сдача ${cashier.change}!`);
+  },
+  onError() {
+    console.log(`Очень жаль, ${cashier.error}!`);
+  },
+  reset() {
+    cashier.customerMoney = 0;
+    cashier.totalPrice = 0;
+    cashier.change = 0;
+    cashier.error = null;
+  },
+};
 
 // Вызовы свойств и методов объектов для проверки работоспособности.
 
