@@ -1,4 +1,4 @@
-// Задача: Создать объект "notebook" для работы с массивом заметок.
+// Задача: Создать объект "notepad" для работы с массивом заметок.
 
 // Каждая заметка это объект следующего формата:
 
@@ -15,9 +15,9 @@ const PRIORITY_TYPES = {
   HIGH: 2,
 };
 
-// Модель обьекта "notebook":
+// Модель обьекта "notepad":
 
-const notebook = {
+const notepad = {
   notes: [],
 
   getNotes() {
@@ -92,7 +92,7 @@ const notebook = {
 
 // Добавим 4 новые заметки.
 
-notebook.saveNote({
+notepad.saveNote({
   id: 1,
   title: 'JavaScript essentials',
   body:
@@ -100,7 +100,7 @@ notebook.saveNote({
   priority: PRIORITY_TYPES.HIGH,
 });
 
-notebook.saveNote({
+notepad.saveNote({
   id: 2,
   title: 'Refresh HTML and CSS',
   body:
@@ -108,7 +108,7 @@ notebook.saveNote({
   priority: PRIORITY_TYPES.NORMAL,
 });
 
-notebook.saveNote({
+notepad.saveNote({
   id: 3,
   title: 'Get comfy with Frontend frameworks',
   body:
@@ -116,7 +116,7 @@ notebook.saveNote({
   priority: PRIORITY_TYPES.NORMAL,
 });
 
-notebook.saveNote({
+notepad.saveNote({
   id: 4,
   title: 'Winter clothes',
   body:
@@ -125,53 +125,53 @@ notebook.saveNote({
 });
 
 // Выводим все текущие заметки:
-console.log('Все текущие заметки: ', notebook.getNotes());
+console.log('Все текущие заметки: ', notepad.getNotes());
 
 // Выводим заметку с существующим id:
-console.log(notebook.findNoteById(2));
+console.log(notepad.findNoteById(2));
 
 // Выводим заметку с несуществующим id:
-console.log(notebook.findNoteById(5));
+console.log(notepad.findNoteById(5));
 
 //   Oтфильтровать и отобразить заметки по слову 'html' в заголовке или теле заметки:
 console.log(
   'Отфильтровали заметки по ключевому слову "html": ',
-  notebook.filterNotes('html'),
+  notepad.filterNotes('html'),
 );
 
 //   Oтфильтровать и отобразить  заметки по слову 'javascript' в заголовке или теле заметки:
 console.log(
   'Отфильтровали заметки по ключевому слову "javascript": ',
-  notebook.filterNotes('javascript'),
+  notepad.filterNotes('javascript'),
 );
 
 //   Повышаем приоритет заметки с id:4
-notebook.updateNotePriority(4, PRIORITY_TYPES.HIGH);
+notepad.updateNotePriority(4, PRIORITY_TYPES.HIGH);
 //  Выводим все текущие заметки:
 console.log(
   'Заметки после обновления приоритета для id 4: ',
-  notebook.getNotes(),
+  notepad.getNotes(),
 );
 
 //   Понижаем приоритет заметки с id:3
-notebook.updateNotePriority(3, PRIORITY_TYPES.LOW);
+notepad.updateNotePriority(3, PRIORITY_TYPES.LOW);
 // Выводим все текущие заметки:
 console.log(
   'Заметки после обновления приоритета для id 3: ',
-  notebook.getNotes(),
+  notepad.getNotes(),
 );
 
 // Обновим поле 'title' в заметке с id 3:
-notebook.updateNoteContent(3, {
+notepad.updateNoteContent(3, {
   field: 'title',
   value: 'Get comfy with React.js',
 });
 // Выводим все текущие заметки:
 console.log(
   'Заметки после обновления контента заметки с id 3: ',
-  notebook.getNotes(),
+  notepad.getNotes(),
 );
 
 // Удаляем заметку с id:2 и проверяем масив после удаления заметки:
-notebook.deleteNote(2);
-console.log('Заметки после удаления с id 2: ', notebook.getNotes());
+notepad.deleteNote(2);
+console.log('Заметки после удаления с id 2: ', notepad.getNotes());
