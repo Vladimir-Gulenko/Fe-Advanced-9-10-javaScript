@@ -14,25 +14,25 @@ const PRIORITY_TYPES = {
 const Notepad = function Notepad(notes = []) {
   this.notes = notes;
 
-  (this.getNotes = function getNotes() {
+  this.getNotes = function getNotes() {
     return this.notes;
-  }),
-    (this.findNoteById = function findNoteById(id) {
+  },
+    this.findNoteById = function findNoteById(id) {
       for (const note of this.notes) {
         if (note.id === id) return note;
       }
-    }),
-    (this.saveNote = function saveNote(note) {
+    },
+    this.saveNote = function saveNote(note) {
       return this.notes.push(note);
-    }),
-    (this.updateNotePriority = function updateNotePriority(id, priority) {
+    },
+    this.updateNotePriority = function updateNotePriority(id, priority) {
       const note = this.findNoteById(id);
       if (!note) {
         return;
       }
       note.priority = priority;
-    }),
-    (this.filterNotes = function filterNotes(query = '') {
+    },
+    this.filterNotes = function filterNotes(query = '') {
       let newFilteredNotes = [];
       for (const note of this.notes) {
         const hasQueryInTitle = note.title
@@ -46,8 +46,8 @@ const Notepad = function Notepad(notes = []) {
         }
       }
       return newFilteredNotes;
-    }),
-    (this.updateNoteContent = function updateNoteContent(id, updatedContent) {
+    },
+    this.updateNoteContent = function updateNoteContent(id, updatedContent) {
       let note = this.findNoteById(id);
       if (!note) return;
 
@@ -56,7 +56,8 @@ const Notepad = function Notepad(notes = []) {
       }
 
       return note;
-    });
+    
+    };
 
   this.deleteNote = function deleteNote(id) {
     for (let i = 0; i < this.notes.length; i += 1) {
@@ -66,7 +67,7 @@ const Notepad = function Notepad(notes = []) {
         return;
       }
     }
-  };
+  }
 };
 
 // Добавляем статическое свойство, в котором храним карту приоритетов.
