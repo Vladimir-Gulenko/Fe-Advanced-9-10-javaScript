@@ -207,7 +207,7 @@ const createNoteFooter = (priority) => {
 };
 
 
-// Функция добавляет кнопки в секции
+// Функция добавляет кнопки в секции тела заметок
 const createActionButton = (action, icon) => {
   const actionButton = document.createElement('button');
   actionButton.classList.add('action');
