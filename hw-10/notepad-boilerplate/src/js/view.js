@@ -1,7 +1,7 @@
 import {
     ICON_TYPES,
     NOTE_ACTIONS
-} from './../utils/constants';
+} from './utils/constants';
 
 import Notepad from './notepad-model'
 

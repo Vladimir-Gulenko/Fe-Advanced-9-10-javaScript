@@ -1,9 +1,9 @@
 import {
-    NOTE_ACTIONS
-} from './../utils/constants';
-import {PRIORITY_TYPES}  from './constants';
+    NOTE_ACTIONS,
+    PRIORITY_TYPES
+} from './utils/constants';
 import Notepad from './notepad-model';
-import notes from '../../assets/notes.json';
+import notes from './../assets/notes.json';
 import {
     getRefs,
     createListItem,

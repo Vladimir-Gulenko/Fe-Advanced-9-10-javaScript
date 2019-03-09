@@ -1,6 +1,6 @@
 import {
-  PRIORITY_TYPES
-} from '../utils/constants';
+  PRIORITY_TYPES, PRIORITIES
+} from './utils/constants';
 
 // Функциональный класс 'Notepad'
 export default class Notepad {
@@ -21,10 +21,10 @@ export default class Notepad {
   // Получает приоритет заметки
   static getPriorityName(priorityId) {
     let valuesPriorityType = Object.values(PRIORITY_TYPES);
-    let idPriorities = Notepad.PRIORITIES[priorityId].id;
+    let idPriorities = PRIORITIES[priorityId].id;
 
     if (valuesPriorityType.includes(idPriorities)) {
-        return Notepad.PRIORITIES[priorityId].name;
+        return PRIORITIES[priorityId].name;
     }
 }
   // Конструктор класса
@@ -104,21 +104,3 @@ export default class Notepad {
 
 };
 
-// Карта приоритетов
- Notepad.PRIORITIES = {
-  0: {
-    id: 0,
-    value: 0,
-    name: 'Low',
-  },
-  1: {
-    id: 1,
-    value: 1,
-    name: 'Normal',
-  },
-  2: {
-    id: 2,
-    value: 2,
-    name: 'High',
-  },
-};

@@ -1,3 +1,4 @@
+
 export const PRIORITY_TYPES = {
   LOW: 0,
   NORMAL: 1,
@@ -17,3 +18,21 @@ export const NOTE_ACTIONS = {
   INCREASE_PRIORITY: 'increase-priority',
   DECREASE_PRIORITY: 'decrease-priority',
 };
+
+export const PRIORITIES = {
+    0: {
+      id: 0,
+      value: 0,
+      name: 'Low',
+    },
+    1: {
+      id: 1,
+      value: 1,
+      name: 'Normal',
+    },
+    2: {
+      id: 2,
+      value: 2,
+      name: 'High',
+    },
+  };
