@@ -46,18 +46,17 @@ const handleSubmit = e => {
   addListItem(refs.list, newItem);
 };
 
-
 // Функция заполнения поисковой формы
-const curentInputValue = evt => {
-  const target = evt.target;
+const curentInputValue = e => {
+  const target = e.target;
   const searchedItem = notepad.filterNotesByQuery(target.value);
   refs.list.innerHTML = '';
-  renderListItems(refs.list, searchedItem);
+  return renderListItems(refs.list, searchedItem);
 };
 
 // Функция поиска заметок
-const search = evt => {
-  const target = evt.target;
+const search = e => {
+  const target = e.target;
   target.oninput = curentInputValue;
 };
 
@@ -65,10 +64,11 @@ const search = evt => {
 const handleRemoveNote = e => {
   const target = e.target;
   const nodeName = target.nodeName;
-  const action = target.textContent;
-  if (nodeName !== 'I' || action !== 'delete') return;
-  const parent = target.closest('.note-list__item');
-  parent.remove();
+  if (target.textContent !== "delete" || nodeName !== 'I') return;
+  const liRemove = target.closest("li");
+  const idRemove = liRemove.dataset.id;
+  notepad.deleteNote(idRemove);
+  liRemove.remove();
 };
 
 // Функция активации кнопок заметки

@@ -16,12 +16,13 @@ export const getRefs = () => ({
 // Добавление заметки из шаблона
 
 const createNoteMarkup = note => {
-    // const noteWithPriority = Object.assign(note, {
-    //   priority: Notepad.getPriorityName(),
-    // });
-  
-    return noteTemplate(note);
+  const noteWithTextPriority = {
+    ...note,
+    priority: Notepad.getPriorityName(note.priority)
   };
+  
+  return noteTemplate(noteWithTextPriority);
+};
   
   const createNoteListItemsMarkup = notes => {
     return notes.map(note => createNoteMarkup(note)).join('');
