@@ -1,8 +1,8 @@
 import {
-  PRIORITY_TYPES, PRIORITIES,
+  PRIORITY_TYPES,
+  PRIORITIES,
 } from './utils/constants';
-import storage from './utils/storage'
-
+import * as api from './../services/api';
 
 // Функциональный класс 'Notepad'
 export default class Notepad {
@@ -29,7 +29,7 @@ export default class Notepad {
 
     return PRIORITY_TYPES.LOW;
   }
-    
+
 
   // Конструктор класса
   constructor(notes = []) {
@@ -37,25 +37,36 @@ export default class Notepad {
   }
 
   // Сохраняет новую заметку в масиве заметок
-  saveNote(title, body)  {
+  saveNote(title, body) {
     return new Promise(resolve => {
-      setTimeout(() => {
-        const newItem = {
-          id: Notepad.generateUniqueId(),
-          title: title,
-          body: body,
-          priority: Notepad.getPriorityName(),
-        };
-        this._notes.push(newItem);
-        storage.save('notes', this._notes);
-        
-        resolve(newItem);
-      }, 300);
-    });
+        setTimeout(() => {
+          const newItem = {
+            id: Notepad.generateUniqueId(),
+            title: title,
+            body: body,
+            priority: Notepad.getPriorityName(),
+          };
+
+          resolve(newItem);
+        }, 200);
+      })
+      .then(note => {
+        return api.saveNote(note);
+      })
+      .then(note => {
+        this._notes.push(note);
+
+        return note;
+      });
   }
+
   // Получает ссылку на масив заметок
   get notes() {
-    return this._notes;
+    return api.getNotes().then(notes => {
+      this._notes = notes;
+
+      return this._notes;
+    });
   }
 
   // Поиск заметки по ID
@@ -75,21 +86,25 @@ export default class Notepad {
   }
 
   // Фильтрует заметки по строке
-  filterNotesByQuery(query = '') {
-    let newFilteredNotes = [];
-    for (const note of this._notes) {
-      const hasQueryInTitle = note.title
-        .toLowerCase()
-        .includes(query.toLowerCase());
-      const hasQueryInBody = note.body
-        .toLowerCase()
-        .includes(query.toLowerCase());
-      if (hasQueryInTitle || hasQueryInBody) {
-        newFilteredNotes.push(note);
-      }
-    }
-  
-    return newFilteredNotes;
+  filterNotesByQuery(query) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const filteredNote = [];
+        for (let i = 0; i < this._notes.length; i += 1) {
+          const {
+            title,
+            body
+          } = this._notes[i];
+          const note = `${title} ${body}`;
+          const resultNote = note.toLowerCase().includes(query.toLowerCase());
+          if (resultNote) {
+            filteredNote.push(this._notes[i]);
+          }
+
+          resolve(filteredNote);
+        }
+      }, 200);
+    });
   }
 
   // Фильтрует заметки по приоритету
@@ -118,14 +133,20 @@ export default class Notepad {
   // Удаляет заметку
   deleteNote(id) {
     return new Promise(resolve => {
-      setTimeout(() => {
+        setTimeout(() => {
+          this._notes = this._notes.filter(item => item.id !== id);
+
+          resolve(this._notes);
+        }, 200);
+      })
+      .then(() => {
         this._notes = this._notes.filter(item => item.id !== id);
-        storage.save('notes', this._notes);
-  
-        resolve(this._notes);
-      }, 300);
-    });
+
+        return id;
+      })
+      .then(id => {
+        api.deleteNote(id);
+      });
   }
 
 };
-

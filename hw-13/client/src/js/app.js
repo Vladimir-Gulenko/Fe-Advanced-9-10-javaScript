@@ -3,7 +3,7 @@ import {
     PRIORITY_TYPES
 } from './utils/constants';
 import Notepad from './notepad-model';
-import notes from './../assets/notes.json';
+// import notes from './../assets/notes.json';
 import {
     getRefs,
     addListItem,
@@ -12,13 +12,18 @@ import {
 import Notyf from 'notyf';
 import MicroModal from 'micromodal';
 import 'notyf/dist/notyf.min.css';
-import storage from './utils/storage'
+import * as api from './../services/api';
 
 
-// const notepad = new Notepad(notes);
+
 const refs = getRefs();
 const notyf = new Notyf();
 MicroModal.init();
+const item = new Notepad();
+
+api.getNotes().then(note => {
+  renderListItems(refs.list, note);
+});
 
 
 const titleInput = refs.form.querySelector('input');
@@ -100,17 +105,6 @@ const hendleListItemBtnClick = ({ target }) => {
 const handleAddClick = element => {
   MicroModal.show('note-editor-modal');
 }
-
-// Загружаем с localStorage сохраненные заметки
-const getNotesFromLocalStorage = storage.load('notes');
-const getNotes = getNotesFromLocalStorage ? getNotesFromLocalStorage : [];
-
-const item = new Notepad(getNotes);
-
-
-// Вызов функции генерации заметок в DOM
-renderListItems(refs.list, item.notes);
-
 
 //  Добавление слушателей
 refs.form.addEventListener('submit', handleSubmit);
