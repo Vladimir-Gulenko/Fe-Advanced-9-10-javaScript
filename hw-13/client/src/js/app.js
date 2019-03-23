@@ -3,7 +3,7 @@ import {
     PRIORITY_TYPES
 } from './utils/constants';
 import Notepad from './notepad-model';
-// import notes from './../assets/notes.json';
+// import notes from '';
 import {
     getRefs,
     addListItem,
@@ -12,7 +12,7 @@ import {
 import Notyf from 'notyf';
 import MicroModal from 'micromodal';
 import 'notyf/dist/notyf.min.css';
-import * as api from './../services/api';
+import * as api from '../services/api';
 
 
 

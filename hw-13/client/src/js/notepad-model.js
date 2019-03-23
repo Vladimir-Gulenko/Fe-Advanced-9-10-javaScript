@@ -2,7 +2,7 @@ import {
   PRIORITY_TYPES,
   PRIORITIES,
 } from './utils/constants';
-import * as api from './../services/api';
+import * as api from '../services/api';
 
 // Функциональный класс 'Notepad'
 export default class Notepad {
